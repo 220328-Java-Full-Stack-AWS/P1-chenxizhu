@@ -1,4 +1,4 @@
-package com.revature.services;
+package com.revature.ers.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -7,16 +7,16 @@ import static org.mockito.Mockito.*;
 
 import java.util.Optional;
 
-import com.revature.exceptions.NewUserHasNonZeroIdException;
-import com.revature.exceptions.RegistrationUnsuccessfulException;
-import com.revature.repositories.UserDAO;
+import com.revature.ers.exceptions.NewUserHasNonZeroIdException;
+import com.revature.ers.exceptions.RegistrationUnsuccessfulException;
+import com.revature.ers.exceptions.UsernameNotUniqueException;
+import com.revature.ers.models.Role;
+import com.revature.ers.models.User;
+import com.revature.ers.repositories.UserDAO;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.revature.exceptions.UsernameNotUniqueException;
-import com.revature.models.Role;
-import com.revature.models.User;
 
 public class AuthServiceTest {
 	
@@ -59,7 +59,7 @@ public class AuthServiceTest {
 		when(userService.getByUsername(anyString())).thenReturn(Optional.empty());
 		when(userDAO.create(anyObject())).thenReturn(GENERIC_EMPLOYEE_1);
 		
-		assertEquals(GENERIC_EMPLOYEE_1, authService.register(EMPLOYEE_TO_REGISTER));
+		Assert.assertEquals(GENERIC_EMPLOYEE_1, authService.register(EMPLOYEE_TO_REGISTER));
 
 		verify(userService).getByUsername(EMPLOYEE_TO_REGISTER.getUsername());
 		verify(userDAO).create(EMPLOYEE_TO_REGISTER);
@@ -87,7 +87,7 @@ public class AuthServiceTest {
 	public void testLoginPassesWhenUsernameDoesExistAndPasswordMatches() {
 		when(userService.getByUsername(anyString())).thenReturn(Optional.of(GENERIC_EMPLOYEE_1));
 
-		assertEquals(GENERIC_EMPLOYEE_1, authService.login(GENERIC_EMPLOYEE_1.getUsername(), GENERIC_EMPLOYEE_1.getPassword()));
+		Assert.assertEquals(GENERIC_EMPLOYEE_1, authService.login(GENERIC_EMPLOYEE_1.getUsername(), GENERIC_EMPLOYEE_1.getPassword()));
 
 		verify(userService).getByUsername(EMPLOYEE_TO_REGISTER.getUsername());
 	}
