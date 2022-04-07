@@ -16,6 +16,10 @@ public class userOrAdmin {
             System.out.println("You now have admin access.");
         } else {
             System.out.println("Welcome peasant.");
+            //enter user interface
+            new UserOptions();
+            UserOptions.main(new String[]{""});
+            UserOptions.printMenu(new String[]{""});
         }
 
     }

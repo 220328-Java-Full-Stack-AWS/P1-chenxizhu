@@ -25,6 +25,7 @@ public class User extends AbstractUser {
      * If other fields are needed, please create additional constructors.
      */
     public User(int id, String username, String password, Role role) {
+
         super(id, username, password, role);
     }
 }

@@ -27,4 +27,10 @@ public class UserService {
 	public Optional<User> getByUsername(String username) {
 		return Optional.empty();
 	}
+/*
+	public UserLogin() {
+
+	}
+
+ */
 }
