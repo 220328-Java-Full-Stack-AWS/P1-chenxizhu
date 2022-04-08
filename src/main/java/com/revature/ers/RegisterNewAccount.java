@@ -1,9 +1,12 @@
 package com.revature.ers;
+import com.revature.ers.models.User;
 import java.util.Scanner;
 
 public class RegisterNewAccount {
     public RegisterNewAccount() {
     }
+
+
 
     public static void main(String[] args, String dfd) {
         String username, password, confirmPassword;

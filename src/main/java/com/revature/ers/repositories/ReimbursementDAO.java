@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class ReimbursementDAO {
+    public ReimbursementDAO() {
+    }
 
     /**
      * Should retrieve a Reimbursement from the DB with the corresponding id or an empty optional if there is no match.

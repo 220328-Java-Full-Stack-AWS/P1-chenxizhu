@@ -1,8 +1,12 @@
 package com.revature.ers.services;
 
+
+import com.revature.ers.repositories.UserDAO;
 import java.util.Optional;
 
 import com.revature.ers.models.User;
+
+
 
 /**
  * The UserService should handle the processing and retrieval of Users for the ERS application.
@@ -21,6 +25,17 @@ import com.revature.ers.models.User;
  */
 public class UserService {
 
+	private UserDAO ud;
+
+//swap out with actual data base when ready
+	public UserService(UserDAO ud) {
+		this.ud = ud;
+	}
+
+
+	public User login(String username, String password) {
+		if(ud.getByUsername(username).isPresent() && ud.getByUsername(username).getPassword(password).equals(password)));
+	}
 	/**
 	 *     Should retrieve a User with the corresponding username or an empty optional if there is no match.
      */
