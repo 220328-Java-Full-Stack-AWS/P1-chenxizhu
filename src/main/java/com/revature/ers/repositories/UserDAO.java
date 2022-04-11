@@ -7,12 +7,13 @@ import java.util.Optional;
 
 
 public class UserDAO {
-    void saveUser(User u) {
+    public void saveUser(User u) {
 
     }
 
-    List<User> getAllUsers() {
-        return null;
+    public static List<User> getAllUsers() {
+        List<User> User = null;
+        return User;
     }
 
     User getUserByUserName(String username) {

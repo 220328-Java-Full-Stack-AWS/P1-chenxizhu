@@ -136,10 +136,17 @@ public class User implements Comparable<User>{
     public User(int id, String username, String password, Role role) {
 
         //super(id, username, password, role);
-
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
 
     }
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public int compareTo(User o) {

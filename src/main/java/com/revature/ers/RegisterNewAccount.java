@@ -1,5 +1,8 @@
 package com.revature.ers;
 import com.revature.ers.models.User;
+import com.revature.ers.repositories.UserDAO;
+import com.revature.ers.services.UserService;
+
 import java.util.Scanner;
 
 public class RegisterNewAccount {
@@ -22,6 +25,9 @@ public class RegisterNewAccount {
         confirmPassword = s.nextLine();
         if(password.equals(confirmPassword) && password.length() > 10 && username.length() > 8)
         {
+
+            UserService.Register(username, password);
+            System.out.println(UserDAO.getAllUsers());
             System.out.println("Registration Successful");
             //code to store the data in the database
         }

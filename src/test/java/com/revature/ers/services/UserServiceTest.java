@@ -24,7 +24,7 @@ public class UserServiceTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        userService = new UserService();
+        //userService = new UserService();
         userDAO = mock(UserDAO.class);
     }
 
