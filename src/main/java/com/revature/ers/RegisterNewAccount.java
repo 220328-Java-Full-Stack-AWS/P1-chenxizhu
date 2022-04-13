@@ -1,5 +1,4 @@
 package com.revature.ers;
-import com.revature.ers.models.User;
 import com.revature.ers.repositories.UserDAO;
 import com.revature.ers.services.UserService;
 
@@ -11,7 +10,7 @@ public class RegisterNewAccount {
 
 
 
-    public static void main(String[] args, String dfd) {
+    public static void main(String[] args) {
         String username, password, confirmPassword;
         Scanner s = new Scanner(System.in);
         System.out.print("Register Your username:");//username:user
@@ -23,11 +22,14 @@ public class RegisterNewAccount {
         password = s.nextLine();
         System.out.print("Confirm password:");//password:user
         confirmPassword = s.nextLine();
-        if(password.equals(confirmPassword) && password.length() > 10 && username.length() > 8)
+        if(password.equals(confirmPassword) && password.length() > 9 && username.length() > 7)
         {
+            UserDAO userDAO = new UserDAO();
 
-            UserService.Register(username, password);
-            System.out.println(UserDAO.getAllUsers());
+            //userDAO.saveUser(User);
+            UserService userService = new UserService(new UserDAO());
+            userService.register(username, password);
+            System.out.println(userDAO.getAllUsers());
             System.out.println("Registration Successful");
             //code to store the data in the database
         }
@@ -35,7 +37,7 @@ public class RegisterNewAccount {
         {
             System.out.println("Registration Failed. You might want to use a longer username and password.");
         }
-        if (password != confirmPassword) {
+        if (!password.equals(confirmPassword)) {
             System.out.println("Password not matching.");
         }
     }

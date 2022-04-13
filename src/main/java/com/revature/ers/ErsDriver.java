@@ -14,8 +14,8 @@ public class ErsDriver {
 
         }
         System.out.println("Employment Reimbursement System. Please register or Login.");
-        new LoginOrRegister();
-        LoginOrRegister.main(new String[]{"abed"}, "dfd");
+        //new LoginOrRegister();
+        LoginOrRegister.main(new String[]{});
 
     }
 

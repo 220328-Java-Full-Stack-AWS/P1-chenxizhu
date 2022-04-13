@@ -1,7 +1,5 @@
 package com.revature.ers;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -19,7 +17,7 @@ public class ConnectionManager {
     private ConnectionManager() {
     }
 
-    public static Connection getConnection() throws SQLException, IOException {
+    public static Connection getConnection(){
         if(connection == null) {
             connection = connect();
         }
@@ -28,7 +26,7 @@ public class ConnectionManager {
     }
 
     //establish connection method
-    private static Connection connect() throws IOException, SQLException {
+    private static Connection connect(){
         /*
         jdbc:postgresql://hostname:port/databaseName
         //?currentSchema=schemaName
@@ -44,26 +42,28 @@ public class ConnectionManager {
          */
 
 
-        //New method grabbing the properties from the JAR classpath
-        Properties props = new Properties();
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        InputStream input = loader.getResourceAsStream("application.properties");
-        props.load(input);
+        try {
+
+            //New method grabbing the properties from the JAR classpath
+            Properties props = new Properties();
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream input = loader.getResourceAsStream("application.properties");
+            props.load(input);
 
 
+            String connectionString = "jdbc:postgresql://" +
+                    props.getProperty("hostname") + ":" +
+                    props.getProperty("port") + "/" +
+                    props.getProperty("dbname");
 
+            String username = props.getProperty("username");
+            String password = props.getProperty("password");
 
-        String connectionString = "jdbc:postgresql://" +
-                props.getProperty("hostname") + ":" +
-                props.getProperty("port") + "/" +
-                props.getProperty("dbname");
-
-        String username = props.getProperty("username");
-        String password = props.getProperty("pass");
-
-        connection = DriverManager.getConnection(connectionString, username, password);
-
-        System.out.println("Connection String: " + connectionString);
+            connection = DriverManager.getConnection(connectionString, username, password);
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+        //System.out.println("Connection String: " + connectionString);
 
         return connection;
 

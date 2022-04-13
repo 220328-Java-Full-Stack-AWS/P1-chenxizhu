@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 
 public class AbstractUser {
-
+/*
     private int id;
     private String username;
     private String password;
@@ -92,4 +92,6 @@ public class AbstractUser {
                 ", role=" + role +
                 '}';
     }
+
+ */
 }

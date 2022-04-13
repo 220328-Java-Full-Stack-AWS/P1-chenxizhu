@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class LoginOrRegister {
     public LoginOrRegister() {
     }
-    public static void main(String[] args, String dfd) {
+    public static void main(String[] args) {
         //use boolean for login or register?
         String login, register;
         Scanner s = new Scanner(System.in);
@@ -17,7 +17,7 @@ public class LoginOrRegister {
         }
         else {
             new RegisterNewAccount();
-            RegisterNewAccount.main(new String[]{"abed"}, "dfd");
+            RegisterNewAccount.main(new String[]{});
         }
 
 

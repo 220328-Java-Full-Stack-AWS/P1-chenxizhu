@@ -26,18 +26,23 @@ import com.revature.ers.models.User;
  */
 public class UserService {
 	//public static Object Login;
-	public static UserDAO ud;
+	//never intialized refactored it
+	public UserDAO ud;
+
+	//working on authenticate user with database
+	public UserService User;
 
 	//private UserDAO ud;
 
 //swap out with actual data base when ready
-	public UserService() {
+	public UserService(UserDAO ud) {
 
 		this.ud = ud;
 	}
 
 
-	public User Login(String username, String password) {
+	public User login(String username, String password) {
+		// the .get() gets over the extra layer between ud.getByUsername() and .getPassword()
 		if(ud.getByUsername(username).isPresent() && ud.getByUsername(username).get().getPassword().equals(password)) {
 
 		} else {
@@ -48,7 +53,7 @@ public class UserService {
 	}
 
 
-	public static User Register(String username, String password){
+	public User register(String username, String password){
 
 		User u = new User(username, password);
 		//From the service, we would make our database call to actually store this user away

@@ -1,4 +1,7 @@
 package com.revature.ers;
+import com.revature.ers.repositories.UserDAO;
+import com.revature.ers.services.UserService;
+
 import java.util.Scanner;
 
 public class Login {
@@ -7,13 +10,14 @@ public class Login {
 
     public static void main(String[] args, String abc) {
 
-        String username, password;
+        String usernameauth, passwordauth;
+        UserService userservice = new UserService();
         Scanner s = new Scanner(System.in);
         System.out.print("Enter username:");//username:user
-        username = s.nextLine();
+        usernameauth = s.nextLine();
         System.out.print("Enter password:");//password:user
-        password = s.nextLine();
-        if(username.equals("user") && password.equals("user"))
+        passwordauth = s.nextLine();
+        if(usernameauth.equals(userservice.User.login()) && passwordauth.equals("user"))
         {
             System.out.println("Authentication Successful");
             //display dashboard function;
@@ -24,7 +28,7 @@ public class Login {
         {
             System.out.println("Authentication Failed");
             new LoginOrRegister();
-            LoginOrRegister.main(new String[]{"abed"}, "dfd");
+            LoginOrRegister.main(new String[]{});
         }
     }
 }

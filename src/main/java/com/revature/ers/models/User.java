@@ -1,6 +1,5 @@
 package com.revature.ers.models;
 
-import java.util.*;
 import java.util.HashSet;
 
 /**
@@ -17,27 +16,27 @@ import java.util.HashSet;
  * </ul>
  *
  */
-public class User implements Comparable<User>{
+public class User extends AbstractUser {
     private String username;
     private String password;
 
     private String email;
     private String first;
     private String last;
-    private String expenseAmount;
+    private String reimbursementAmount;
     private String reimbursement;
     private Role role;
     private int id;
 
     private boolean requestStatus;
 
-    public User(String username, String password, String email, String first, String last, String expenseAmount, String reimbursement, Role role, int id, boolean requestStatus) {
+    public User(String username, String password, String email, String first, String last, String reimbursementAmount, String reimbursement, Role role, int id, boolean requestStatus) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.first = first;
         this.last = last;
-        this.expenseAmount = expenseAmount;
+        this.reimbursementAmount = reimbursementAmount;
         this.reimbursement = reimbursement;
         this.role = role;
         this.id = id;
@@ -89,12 +88,12 @@ public class User implements Comparable<User>{
         this.last = last;
     }
 
-    public String getExpenseAmount() {
-        return expenseAmount;
+    public String getReimbursementAmount() {
+        return reimbursementAmount;
     }
 
-    public void setExpenseAmount(String expenseAmount) {
-        this.expenseAmount = expenseAmount;
+    public void setReimbursementAmount(String reimbursementAmount) {
+        this.reimbursementAmount = reimbursementAmount;
     }
 
     public String getReimbursement() {
@@ -148,7 +147,7 @@ public class User implements Comparable<User>{
         this.password = password;
     }
 
-    @Override
+    //@Override
     public int compareTo(User o) {
         return 0;
     }
