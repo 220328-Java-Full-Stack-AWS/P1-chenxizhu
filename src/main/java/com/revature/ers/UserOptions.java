@@ -44,19 +44,19 @@ public class UserOptions {
     }
     // Options
     private static void option1() {
-        System.out.println("Thanks for choosing option 1");
+        System.out.println("1- Send request for reimbursement");
         //send request for reimbursement
     }
     private static void option2() {
-        System.out.println("Thanks for choosing option 2");
+        System.out.println("2- Cancel my request for reimbursement");
         //cancel my request for reimbursement
     }
     private static void option3() {
-        System.out.println("Thanks for choosing option 3");
+        System.out.println("3- View my pending and completed past requests");
         //view my pending and completed past requests
     }
     private static void option4() {
-        System.out.println("Thanks for choosing option 4");
+        System.out.println("4- Edit my pending requests for reimbursement");
         //edit my pending requests for reimbursement
     }
 
