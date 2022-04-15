@@ -49,6 +49,8 @@ public class ConnectionManager {
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream input = loader.getResourceAsStream("application.properties");
             props.load(input);
+            //if we type the above code in one line
+            // props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(("application.properties")));
 
 
             String connectionString = "jdbc:postgresql://" +

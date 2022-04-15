@@ -44,12 +44,17 @@ public class UserService {
 	public User login(String username, String password) {
 		// the .get() gets over the extra layer between ud.getByUsername() and .getPassword()
 		if(ud.getByUsername(username).isPresent() && ud.getByUsername(username).get().getPassword().equals(password)) {
-
+			User u = new User(username, password);
+			ud.userAuth(username, password);
 		} else {
 			throw new UsernameOrPasswordIncorrectException();
 		}
-		return null;
-		//return User.User(username, password);
+		//eturn null;
+		return User.User(username, password);
+	}
+
+	private com.revature.ers.models.User User(String username, String password) {
+		return User.User(username, password);
 	}
 
 
@@ -69,6 +74,8 @@ public class UserService {
 	public Optional<User> getByUsername(String username) {
 		return Optional.empty();
 	}
+
+
 /*
 	public UserLogin() {
 
