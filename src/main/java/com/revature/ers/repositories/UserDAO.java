@@ -58,7 +58,7 @@ public class UserDAO implements userdaoI {
     public User userAuth(String username, String password) {
         User usermodel = new User();
         try {
-            String SQL = "select * from user_table where username = ? and password = ?";
+            String SQL = "select * from user_table where username = ? and password = ?;";
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, username);

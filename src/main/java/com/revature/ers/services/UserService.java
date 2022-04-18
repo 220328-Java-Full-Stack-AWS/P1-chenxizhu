@@ -42,8 +42,7 @@ public class UserService {
 
 
 	public User login(String username, String password) {
-		ud.userAuth(username,password);
-
+		//git ud.userAuth(username,password);
 		// the .get() gets over the extra layer between ud.getByUsername() and .getPassword()
 		if(ud.getByUsername(username).isPresent() && ud.getByUsername(username).get().getPassword().equals(password)) {
 			User u = new User(username, password);
