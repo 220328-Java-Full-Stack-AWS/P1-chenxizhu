@@ -5,7 +5,7 @@ import com.revature.ers.models.User;
 
 import java.util.List;
 
-public interface ReimbursementDInterface<R extends ReimbursementDInterface> {
+public interface ReimbursementDInterface<R extends Reimbursement> {
 
     //CRUD create read update delete
     //create

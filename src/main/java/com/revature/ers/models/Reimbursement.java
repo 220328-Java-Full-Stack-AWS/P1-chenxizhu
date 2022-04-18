@@ -1,5 +1,8 @@
 package com.revature.ers.models;
 
+
+import java.sql.Date;
+
 /**
  * This concrete Reimbursement class can include additional fields that can be used for
  * extended functionality of the ERS application.
@@ -23,17 +26,22 @@ public class Reimbursement extends AbstractReimbursement {
     private double reimbursementAmount;
     private String detail;
     private String email;
+    private Date date;
 
-    public Reimbursement(int reimbursementId, Status status, User author, User resolver, double reimbursementAmount, String detail) {
+    public Reimbursement() {
+    }
+
+    public Reimbursement(int reimbursementId, Status status, User author, String firstname, String lastname, User resolver, double reimbursementAmount, String detail, String email, Date date) {
         this.reimbursementId = reimbursementId;
         this.status = status;
         this.author = author;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.resolver = resolver;
         this.reimbursementAmount = reimbursementAmount;
         this.detail = detail;
-    }
-
-    public Reimbursement() {
+        this.email = email;
+        this.date = date;
     }
 
     public int getReimbursementId() {
@@ -64,6 +72,22 @@ public class Reimbursement extends AbstractReimbursement {
         this.author = author;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     @Override
     public User getResolver() {
         return resolver;
@@ -90,7 +114,22 @@ public class Reimbursement extends AbstractReimbursement {
         this.detail = detail;
     }
 
-    /**
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+/**
      * This includes the minimum parameters needed for the {@link AbstractReimbursement} class.
      * If other fields are needed, please create additional constructors.
      */

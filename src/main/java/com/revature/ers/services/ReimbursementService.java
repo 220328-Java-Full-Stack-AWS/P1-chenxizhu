@@ -3,7 +3,10 @@ package com.revature.ers.services;
 import com.revature.ers.models.Reimbursement;
 import com.revature.ers.models.Status;
 import com.revature.ers.models.User;
+import com.revature.ers.repositories.ReimbursementDAO;
+import com.revature.ers.repositories.UserDAO;
 
+import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +28,19 @@ import java.util.List;
  * </ul>
  */
 public class ReimbursementService {
+    //public static Object Login;
+    //never intialized refactored it
+    public ReimbursementDAO rd;
 
+    //working on authenticate user with database
+    public ReimbursementService Reimburse;
+
+
+    //swap out with actual data base when ready
+    public ReimbursementService(ReimbursementDAO rd) {
+
+        this.rd = rd;
+    }
     /**
      * <ul>
      *     <li>Should ensure that the user is logged in as a Finance Manager</li>
@@ -40,6 +55,13 @@ public class ReimbursementService {
      * The Resolver should be null. Additional fields may be null.
      * After processing, the reimbursement will have its status changed to either APPROVED or DENIED.
      */
+
+    public Reimbursement submitRequest(String firstname, String lastname, String email, double ReimbursementAmount, String detail, Date date) {
+        Reimbursement r = new Reimbursement();
+        return null;
+        //return Reimburse.Reimbursement();
+    }
+
     public Reimbursement process(Reimbursement unprocessedReimbursement, Status finalStatus, User resolver) {
         return null;
     }

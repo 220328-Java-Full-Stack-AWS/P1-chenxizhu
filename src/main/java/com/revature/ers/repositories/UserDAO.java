@@ -54,6 +54,7 @@ public class UserDAO implements userdaoI {
         //return null;
     }
 
+    //read
     public User userAuth(String username, String password) {
         User usermodel = new User();
         try {
@@ -61,7 +62,7 @@ public class UserDAO implements userdaoI {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, username);
-            pstmt.setString(1, password);
+            pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
 

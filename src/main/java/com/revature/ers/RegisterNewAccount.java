@@ -32,6 +32,10 @@ public class RegisterNewAccount {
             System.out.println(userDAO.getAllUsers());
             System.out.println("Registration Successful");
             //code to store the data in the database
+
+            //jump to login again
+            new Login();
+            Login.main(new String[]{"abed"}, "dfd");
         }
         else
         {

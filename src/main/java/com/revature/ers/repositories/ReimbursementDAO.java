@@ -5,16 +5,15 @@ import com.revature.ers.models.Reimbursement;
 import com.revature.ers.models.Status;
 import com.revature.ers.models.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-public class ReimbursementDAO extends ReimbursementDInterface {
+//import static sun.text.bidi.BidiBase.R;
+
+public class ReimbursementDAO implements ReimbursementDInterface {
     public ReimbursementDAO() {
     }
 
@@ -26,97 +25,114 @@ public class ReimbursementDAO extends ReimbursementDInterface {
     }
     */
     //create
-    @Override
-    public void createRequest(ReimbursementDInterface r) {
-        String sql = "INSERT INTO user_table (username, password) VALUES(?, ?)";
+
+    public void createRequest(Reimbursement r) {
+        String sql = "insert into reimburse_table (first_name, last_name, email,reimbursementamount, detail, submit_date) values (?, ?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
-            pstmt.setString(1, u.getUsername());
-            pstmt.setString(1, u.getUsername());
-            pstmt.setString(1, u.getUsername());
-            pstmt.setString(2, u.getPassword());
+            pstmt.setString(1, r.getFirstname());
+            pstmt.setString(2, r.getLastname());
+            pstmt.setString(3, r.getEmail());
+            pstmt.setDouble(4, r.getReimbursementAmount());
+            pstmt.setString(5, r.getDetail());
+            pstmt.setDate(6, r.getDate());
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
+
+    //read
     public List<Reimbursement> showMyRequests() {
-        List<User> User = new LinkedList<>();
+        List<Reimbursement> Reimbursement = new LinkedList<>();
         try {
-            String SQL = "SELECT * FROM user_table";
+            String SQL = "SELECT * FROM reimburse_table;";
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
 
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()) {
-                User user = new User();
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                User.add(user);
+                Reimbursement reimbursement  = new Reimbursement();
+                reimbursement.setFirstname(rs.getString("first_name"));
+                reimbursement.setLastname(rs.getString("last_name"));
+                reimbursement.setEmail(rs.getString("email"));
+                reimbursement.setReimbursementAmount(rs.getDouble("reimbursementamount"));
+                reimbursement.setDetail(rs.getString("detail"));
+                reimbursement.setDate(rs.getDate("submit_date"));
+                Reimbursement.add(reimbursement);
                 //System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return User;
+        return Reimbursement;
     }
 
-    @Override
+
+
+
+
     public Reimbursement getRequestsByAuthor(User author) {
-        return null;
-    }
-
-    @Override
-    public void updateMyRequests(ReimbursementDInterface r) {
-
-    }
-
-    @Override
-    public void cancelMyRequests(ReimbursementDInterface r) {
-
-    }
-};
-
-    //read
-    public List<Reimbursement> showMyRequests(Reimbursement reimbursement) {
-        List<Reimbursement> reimbursement = new LinkedList<>();
+        List<Reimbursement> Reimbursement1 = new LinkedList<>();
         try {
-            String SQL = "SELECT * FROM reimbursement_table WHERE username = ?";
+            String SQL = "SELECT * FROM reimburse_table WHERE author = ?;";
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
 
             ResultSet rs = pstmt.executeQuery();
 
-        while(rs.next()) {
-            Reimbursement reimbursement = new Reimbursement();
-            reimbursement.setUsername(rs.getString("username"));
-            reimbursement.setPassword(rs.getString("password"));
-            Reimbursement.add(reimbursement);
-            //System.out.println(reimbursement);
+            while(rs.next()) {
+                Reimbursement reimbursement  = new Reimbursement();
+                reimbursement.setFirstname(rs.getString("first_name"));
+                reimbursement.setLastname(rs.getString("last_name"));
+                reimbursement.setEmail(rs.getString("email"));
+                reimbursement.setReimbursementAmount(rs.getDouble("reimbursementamount"));
+                reimbursement.setDetail(rs.getString("detail"));
+                reimbursement.setDate(rs.getDate("submit_date"));
+                Reimbursement1.add(reimbursement);
+                //System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            }
-        return Reimbursement;
-        //return null;
-        };
-
-    Reimbursement getRequestsByAuthor(User author) {
-
+        }
+        return (Reimbursement) Reimbursement1;
     };
 
     //update,edit requests
     public void updateMyRequests(Reimbursement r){
+        String sql = "UPDATE reimburse_table SET first_name, last_name, email,reimbursementamount, detail, submit_date  WHERE reimburse_id = ?";
+        try {
+            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+            pstmt.setString(1, r.getFirstname());
+            pstmt.setString(2, r.getLastname());
+            pstmt.setString(2, r.getEmail());
+            pstmt.setDouble(2, r.getReimbursementAmount());
+            pstmt.setString(2, r.getDetail());
+            pstmt.setDate(3, r.getDate());
+            //pstmt.setBoolean(4, r.isCompleted());
+            //pstmt.setInt(5, r.getItemId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     };
 
     //delete, cancel my requests
     public void cancelMyRequests(Reimbursement r){
+        String sql = "DELETE FROM reimburser_table WHERE reimburse_id = ?";
 
+        try {
+            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+            pstmt.setInt(1, r.getReimbursementId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     };
 
     /**
