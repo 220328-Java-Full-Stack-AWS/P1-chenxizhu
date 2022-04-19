@@ -12,18 +12,22 @@ import com.revature.ers.models.User;
 //import static org.graalvm.compiler.options.OptionType.User;
 
 public class Login {
+
+    public UserDAO ud;
+
     public Login() {
     }
 
     public static void main(String[] args, String abc) throws SQLException {
         String username, password;
         User user = new User();
-        UserService userserv = new UserService(new UserDAO());
+        //UserService userserv = new UserService(new UserDAO());
         Scanner s = new Scanner(System.in);
         System.out.print("Enter username:");//username:user
         username = s.nextLine();
         System.out.print("Enter password:");//password:user
         password = s.nextLine();
+
 
         /*
         //create sql query
@@ -41,16 +45,20 @@ public class Login {
             usermodel.setPassword(rs.getString("password"));
 
         */
-        if(
-                username.length() > 7
+       if (
+               ud.userAuth(username,password)
+               //username.length() > 7
                 //username.equals(databaseUsername) && password.equals(databasePassword)
                 //UserDAO.userAuth();
-                //username.equals(userserv.getByUsername(username)) && password.equals(user.getPassword())
+                //username.equals(user.getUsername()) && password.equals(user.getPassword())
         )
         {
 
-            //UserDAO userDAO = new UserDAO();
-            userserv.login(username, password);
+            UserDAO userDAO = new UserDAO();
+            UserService userService = new UserService(new UserDAO());
+            userService.login(username, password);
+            //System.out.println(userDAO.getAllUsers());
+            System.out.println(userDAO.getUserByUserName(username));
             System.out.println("Authentication Successful");
             //display dashboard function;
             new userOrAdmin();

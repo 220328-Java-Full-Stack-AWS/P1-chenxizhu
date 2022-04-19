@@ -57,6 +57,8 @@ public class UserDAO implements userdaoI {
     //read
     public User userAuth(String username, String password) {
 
+
+
         User usermodel = new User();
         try {
             String SQL = "select * from user_table where username = ? and password = ?;";
@@ -70,16 +72,13 @@ public class UserDAO implements userdaoI {
             String databasePassword = "";
 
             while(rs.next()) {
-                User user = new User();
+                //User user = new User();
                 usermodel.setUsername(rs.getString("username"));
                 usermodel.setPassword(rs.getString("password"));
-                user = usermodel;
+
+                return usermodel;
             }
-            if (username.equals(databaseUsername) && password.equals(databasePassword)) {
-                System.out.println("User authenticated.");;
-            } else {
-                System.out.println("User record not matching.");
-            }
+
 
 
         } catch (SQLException e) {
@@ -97,6 +96,7 @@ public class UserDAO implements userdaoI {
             String SQL = "SELECT * FROM user_table WHERE username = ?;";
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, username);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -104,12 +104,13 @@ public class UserDAO implements userdaoI {
                 User user = new User();
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
-                //System.out.println(user);
+                System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return User;
+
     }
 
     public void updateUser(User u) {
