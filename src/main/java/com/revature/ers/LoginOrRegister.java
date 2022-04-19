@@ -1,11 +1,12 @@
 package com.revature.ers;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class LoginOrRegister {
     public LoginOrRegister() {
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         //use boolean for login or register?
         String login, register;
         Scanner s = new Scanner(System.in);

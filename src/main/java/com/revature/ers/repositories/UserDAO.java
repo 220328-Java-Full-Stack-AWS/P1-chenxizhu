@@ -56,6 +56,7 @@ public class UserDAO implements userdaoI {
 
     //read
     public User userAuth(String username, String password) {
+
         User usermodel = new User();
         try {
             String SQL = "select * from user_table where username = ? and password = ?;";
@@ -65,22 +66,50 @@ public class UserDAO implements userdaoI {
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-
+            String databaseUsername = "";
+            String databasePassword = "";
 
             while(rs.next()) {
+                User user = new User();
                 usermodel.setUsername(rs.getString("username"));
                 usermodel.setPassword(rs.getString("password"));
+                user = usermodel;
             }
+            if (username.equals(databaseUsername) && password.equals(databasePassword)) {
+                System.out.println("User authenticated.");;
+            } else {
+                System.out.println("User record not matching.");
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return usermodel;
+
+
     }
 
     public User getUserByUserName(String username) {
-        return null;
+        User User = new User();
+        try {
+            String SQL = "SELECT * FROM user_table WHERE username = ?;";
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                //System.out.println(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return User;
     }
 
     public void updateUser(User u) {

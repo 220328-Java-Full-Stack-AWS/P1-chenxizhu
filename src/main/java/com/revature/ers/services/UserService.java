@@ -42,11 +42,19 @@ public class UserService {
 
 
 	public User login(String username, String password) {
-		//git ud.userAuth(username,password);
+		// ud.userAuth(username,password);
 		// the .get() gets over the extra layer between ud.getByUsername() and .getPassword()
+
 		if(ud.getByUsername(username).isPresent() && ud.getByUsername(username).get().getPassword().equals(password)) {
+			/*
 			User u = new User(username, password);
 			ud.userAuth(username, password);
+
+		 */
+
+		UserDAO userdao = new UserDAO();
+		userdao.userAuth(username,password);
+
 		} else {
 			throw new UsernameOrPasswordIncorrectException();
 		}
@@ -54,9 +62,12 @@ public class UserService {
 		return User.User(username, password);
 	}
 
+
 	private com.revature.ers.models.User User(String username, String password) {
 		return User.User(username, password);
 	}
+
+
 
 
 	public User register(String username, String password){
@@ -73,7 +84,9 @@ public class UserService {
 	 *     Should retrieve a User with the corresponding username or an empty optional if there is no match.
      */
 	public Optional<User> getByUsername(String username) {
-		return Optional.empty();
+
+		return Optional.ofNullable(ud.getUserByUserName(username));
+
 	}
 
 

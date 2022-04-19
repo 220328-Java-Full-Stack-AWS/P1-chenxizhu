@@ -2,6 +2,7 @@ package com.revature.ers;
 import com.revature.ers.repositories.UserDAO;
 import com.revature.ers.services.UserService;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class RegisterNewAccount {
@@ -10,7 +11,7 @@ public class RegisterNewAccount {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         String username, password, confirmPassword;
         Scanner s = new Scanner(System.in);
         System.out.print("Register Your username:");//username:user

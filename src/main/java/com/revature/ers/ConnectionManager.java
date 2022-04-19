@@ -25,6 +25,16 @@ public class ConnectionManager {
         return connection;
     }
 
+    //close the connection
+    public static void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        connection = null;
+    }
+
     //establish connection method
     private static Connection connect(){
         /*
@@ -61,8 +71,10 @@ public class ConnectionManager {
             String username = props.getProperty("username");
             String password = props.getProperty("password");
 
+            //for postman connection
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(connectionString, username, password);
-        } catch (IOException | SQLException e) {
+        } catch (IOException | ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         //System.out.println("Connection String: " + connectionString);
