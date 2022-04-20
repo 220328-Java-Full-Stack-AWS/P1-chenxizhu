@@ -1,5 +1,9 @@
 package com.revature.ers;
 
+import com.revature.ers.models.User;
+import com.revature.ers.repositories.UserDAO;
+import com.revature.ers.services.UserService;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -13,8 +17,19 @@ public class LoginOrRegister {
         System.out.print("Do you want to login?");//username:user
         login = s.nextLine();
         if(login.equals("y")) {
-            new Login();
-            Login.main(new String[]{"abed"}, "dfd");
+            //new Login();
+            //Login.main(new String[]{"abed"}, "dfd");
+            String username, password;
+
+            //UserService userserv = new UserService(new UserDAO());
+
+            System.out.print("Enter username:");//username:user
+            username = s.nextLine();
+            System.out.print("Enter password:");//password:user
+            password = s.nextLine();
+
+            UserService userService = new UserService(new UserDAO());
+            userService.login(username, password);
         }
         else {
             new RegisterNewAccount();

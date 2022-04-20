@@ -44,21 +44,20 @@ public class UserService {
 	public User login(String username, String password) {
 		// ud.userAuth(username,password);
 		// the .get() gets over the extra layer between ud.getByUsername() and .getPassword()
+
 		User u = new User(username, password);
-		if (ud.getByUsername(username).isPresent() && ud.getByUsername(username).get().getPassword().equals(password)) {
+		//if (ud.getByUsername(username).isPresent() && ud.getByUsername(username).get().getPassword().equals(password)) {
+ 			if(ud.getUserByUserName(username) != null && ud.getUserByUserName(username).getPassword().equals(password)){
+				return ud.getUserByUserName(username);
 			/*
 			User u = new User(username, password);
 			ud.userAuth(username, password);
-
-		 */
-
-
 			//From the service, we would make our database call to actually store this user away
-			ud.userAuth(username, password);
+			//ud.userAuth(username, password);
 			if (ud == null) {
-				throw new NullPointerException();
+				throw new UsernameOrPasswordIncorrectException();
 			}
-
+*/
 		}
 		return u;
 	}

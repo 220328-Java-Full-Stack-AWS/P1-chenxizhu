@@ -46,8 +46,9 @@ public class Login {
 
         */
        if (
-               ud.userAuth(username,password)
-               //username.length() > 7
+
+               //userAuth(username,password)
+               username.length() > 7
                 //username.equals(databaseUsername) && password.equals(databasePassword)
                 //UserDAO.userAuth();
                 //username.equals(user.getUsername()) && password.equals(user.getPassword())
