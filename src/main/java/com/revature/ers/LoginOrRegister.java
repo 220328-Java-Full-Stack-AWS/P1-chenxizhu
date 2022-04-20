@@ -30,7 +30,7 @@ public class LoginOrRegister {
             System.out.print("Enter password:");//password:user
             password = s.nextLine();
 
-            //finally worked using getUserByUsername(username)
+            //finally worked by completing and using getUserByUsername(username)
             UserDAO userdao = new UserDAO();
             try {
                 String userTypedPassword = userdao.getUserByUserName(username).getPassword();

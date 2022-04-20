@@ -102,7 +102,8 @@ public class UserDAO implements userdaoI {
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()) {
-
+                //duplicated not necessary statement. causing user not being updateds
+                //User User = new User();
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 System.out.println(user);
