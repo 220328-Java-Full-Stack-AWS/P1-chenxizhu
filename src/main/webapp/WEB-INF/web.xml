@@ -25,4 +25,6 @@
         <servlet-name>pingServlet</servlet-name>
         <url-pattern>/ping</url-pattern>
     </servlet-mapping>
+
+
 </web-app>

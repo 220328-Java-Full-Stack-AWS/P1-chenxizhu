@@ -35,8 +35,8 @@ public class RegisterNewAccount {
             //code to store the data in the database
 
             //jump to login again
-            new Login();
-            Login.main(new String[]{"abed"}, "dfd");
+            new LoginOrRegister();
+            LoginOrRegister.main(new String[]{"abed"});
         }
         else
         {

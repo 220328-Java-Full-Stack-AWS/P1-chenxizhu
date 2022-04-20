@@ -71,7 +71,7 @@ public class ConnectionManager {
             String username = props.getProperty("username");
             String password = props.getProperty("password");
 
-            //for postman connection
+            //for postman connection, force the class to load
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(connectionString, username, password);
         } catch (IOException | ClassNotFoundException | SQLException e) {

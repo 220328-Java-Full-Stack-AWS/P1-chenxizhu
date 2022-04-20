@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class LoginOrRegister {
+
+
     public LoginOrRegister() {
     }
     public static void main(String[] args) throws SQLException {
@@ -28,8 +30,34 @@ public class LoginOrRegister {
             System.out.print("Enter password:");//password:user
             password = s.nextLine();
 
-            UserService userService = new UserService(new UserDAO());
-            userService.login(username, password);
+            //finally worked using getUserByUsername(username)
+            UserDAO userdao = new UserDAO();
+            try {
+                String userTypedPassword = userdao.getUserByUserName(username).getPassword();
+                if (userTypedPassword.equals(password)) {
+                    System.out.println(userdao.getUserByUserName(username).getPassword());
+                    System.out.println("Authentication Successful");
+                    //display dashboard function;
+                    new userOrAdmin();
+                    userOrAdmin.main(new String[]{}, "");
+                }
+                /*
+                else {
+                    System.out.println("Authentication Failed");
+
+                    new LoginOrRegister();
+                    LoginOrRegister.main(new String[]{});
+                }
+
+                 */
+            } catch (NullPointerException N) {
+
+                // catch null pointer exception when typed username is not in the database username column
+                System.out.println("Authentication Failed");
+
+                new LoginOrRegister();
+                LoginOrRegister.main(new String[]{});
+            }
         }
         else {
             new RegisterNewAccount();

@@ -91,17 +91,18 @@ public class UserDAO implements userdaoI {
     }
 
     public User getUserByUserName(String username) {
-        User User = new User();
+        User user = new User();
         try {
             String SQL = "SELECT * FROM user_table WHERE username = ?;";
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, username);
 
+
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()) {
-                User user = new User();
+
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 System.out.println(user);
@@ -109,7 +110,7 @@ public class UserDAO implements userdaoI {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return User;
+        return user;
 
     }
 

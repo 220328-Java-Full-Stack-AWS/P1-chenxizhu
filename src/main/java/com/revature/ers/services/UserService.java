@@ -62,13 +62,6 @@ public class UserService {
 		return u;
 	}
 
-
-
-
-
-
-
-
 	public User register(String username, String password){
 
 		User u = new User(username, password);

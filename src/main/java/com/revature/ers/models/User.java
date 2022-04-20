@@ -24,28 +24,26 @@ public class User extends AbstractUser {
     private String first;
     private String last;
     private String reimbursementAmount;
-    private String reimbursement;
+    private Integer numberOfReimbursements;
     private Role role;
     private int id;
 
     private boolean requestStatus;
 
-    public User(String username, String password, String email, String first, String last, String reimbursementAmount, String reimbursement, Role role, int id, boolean requestStatus) {
+    public User() {
+    }
+
+    public User(String username, String password, String email, String first, String last, String reimbursementAmount, Integer numberOfReimbursements, Role role, int id, boolean requestStatus) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.first = first;
         this.last = last;
         this.reimbursementAmount = reimbursementAmount;
-        this.reimbursement = reimbursement;
+        this.numberOfReimbursements = numberOfReimbursements;
         this.role = role;
         this.id = id;
         this.requestStatus = requestStatus;
-    }
-
-    public User() {
-        reimbursement = String.valueOf(new HashSet<Reimbursement>());
-        //super();
     }
 
     public String getUsername() {
@@ -96,12 +94,12 @@ public class User extends AbstractUser {
         this.reimbursementAmount = reimbursementAmount;
     }
 
-    public String getReimbursement() {
-        return reimbursement;
+    public Integer getNumberOfReimbursements() {
+        return numberOfReimbursements;
     }
 
-    public void setReimbursement(String reimbursement) {
-        this.reimbursement = reimbursement;
+    public void setNumberOfReimbursements(Integer numberOfReimbursements) {
+        this.numberOfReimbursements = numberOfReimbursements;
     }
 
     public Role getRole() {
@@ -145,6 +143,22 @@ public class User extends AbstractUser {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", first='" + first + '\'' +
+                ", last='" + last + '\'' +
+                ", reimbursementAmount='" + reimbursementAmount + '\'' +
+                ", reimbursement='" + numberOfReimbursements + '\'' +
+                ", role=" + role +
+                ", id=" + id +
+                ", requestStatus=" + requestStatus +
+                '}';
     }
 
     //@Override

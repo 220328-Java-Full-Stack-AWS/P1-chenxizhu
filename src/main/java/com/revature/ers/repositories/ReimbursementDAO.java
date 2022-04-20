@@ -27,16 +27,21 @@ public class ReimbursementDAO implements ReimbursementDInterface {
     //create
 
     public void createRequest(Reimbursement r) {
-        String sql = "insert into reimburse_table (first_name, last_name, email,reimbursementamount, detail, submit_date) values (?, ?, ?, ?, ?, ?);";
+        String sql = "insert into reimburse_table (username, first_name, last_name, email,reimbursementamount, detail, submit_date) values (?, ?, ?, ?, ?, ?, ?);" +
+                "update user_table set (first_name, last_name, email, reimbursementamount) = (?, ?, ?, ?) where username = ?;";
+
 
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
-            pstmt.setString(1, r.getFirstname());
-            pstmt.setString(2, r.getLastname());
-            pstmt.setString(3, r.getEmail());
-            pstmt.setDouble(4, r.getReimbursementAmount());
-            pstmt.setString(5, r.getDetail());
-            pstmt.setDate(6, r.getDate());
+            pstmt.setString(1, r.getUsername());
+            pstmt.setString(2, r.getFirstname());
+            pstmt.setString(3, r.getLastname());
+            pstmt.setString(4, r.getEmail());
+            pstmt.setDouble(5, r.getReimbursementAmount());
+            pstmt.setString(6, r.getDetail());
+            pstmt.setDate(7, r.getDate());
+
+
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -73,13 +78,18 @@ public class ReimbursementDAO implements ReimbursementDInterface {
     }
 
 
-
-
-
+    //yea not using it
+    @Override
     public Reimbursement getRequestsByAuthor(User author) {
+        return null;
+    }
+
+
+    //read
+    public Reimbursement getRequestsByUsername(User username) {
         List<Reimbursement> Reimbursement1 = new LinkedList<>();
         try {
-            String SQL = "SELECT * FROM reimburse_table WHERE author = ?;";
+            String SQL = "SELECT * FROM reimburse_table WHERE username = ?;";
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
 

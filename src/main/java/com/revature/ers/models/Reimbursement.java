@@ -27,11 +27,12 @@ public class Reimbursement extends AbstractReimbursement {
     private String detail;
     private String email;
     private Date date;
+    private String username;
 
     public Reimbursement() {
     }
 
-    public Reimbursement(int reimbursementId, Status status, User author, String firstname, String lastname, User resolver, double reimbursementAmount, String detail, String email, Date date) {
+    public Reimbursement(int reimbursementId, Status status, User author, String firstname, String lastname, User resolver, double reimbursementAmount, String detail, String email, Date date, String username) {
         this.reimbursementId = reimbursementId;
         this.status = status;
         this.author = author;
@@ -42,7 +43,19 @@ public class Reimbursement extends AbstractReimbursement {
         this.detail = detail;
         this.email = email;
         this.date = date;
+        this.username = username;
     }
+
+    public Reimbursement(String firstname, String lastname, double reimbursementAmount, String detail, String email, Date date, String username) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.reimbursementAmount = reimbursementAmount;
+        this.detail = detail;
+        this.email = email;
+        this.date = date;
+        this.username = username;
+    }
+
 
     public int getReimbursementId() {
         return reimbursementId;
@@ -129,9 +142,33 @@ public class Reimbursement extends AbstractReimbursement {
     public void setDate(Date date) {
         this.date = date;
     }
-/**
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
      * This includes the minimum parameters needed for the {@link AbstractReimbursement} class.
      * If other fields are needed, please create additional constructors.
      */
 
+    @Override
+    public String toString() {
+        return "Reimbursement{" +
+                "reimbursementId=" + reimbursementId +
+                ", status=" + status +
+                ", author=" + author +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", resolver=" + resolver +
+                ", reimbursementAmount=" + reimbursementAmount +
+                ", detail='" + detail + '\'' +
+                ", email='" + email + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
