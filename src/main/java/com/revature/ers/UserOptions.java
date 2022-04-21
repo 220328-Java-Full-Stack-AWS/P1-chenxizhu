@@ -107,6 +107,7 @@ public class UserOptions {
         username = s.nextLine();
         UserDAO userdao = new UserDAO();
         if (userdao.getUserByUserName(username).getUsername().equals(username)) {
+            //logic is off to transfer username to dao, figure out the data input type in reimbursementService and DAO
             ReimbursementService rd = new ReimbursementService(new ReimbursementDAO());
             Reimbursement r = new Reimbursement();
             rd.readMyRequest(r);
