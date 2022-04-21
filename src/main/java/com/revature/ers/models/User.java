@@ -23,7 +23,7 @@ public class User extends AbstractUser {
     private String email;
     private String first;
     private String last;
-    private String reimbursementAmount;
+    private double reimbursementAmount;
     private Integer numberOfReimbursements;
     private Role role;
     private int id;
@@ -33,7 +33,7 @@ public class User extends AbstractUser {
     public User() {
     }
 
-    public User(String username, String password, String email, String first, String last, String reimbursementAmount, Integer numberOfReimbursements, Role role, int id, boolean requestStatus) {
+    public User(String username, String password, String email, String first, String last, double reimbursementAmount, Integer numberOfReimbursements, Role role, int id, boolean requestStatus) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -44,6 +44,15 @@ public class User extends AbstractUser {
         this.role = role;
         this.id = id;
         this.requestStatus = requestStatus;
+    }
+
+    //constructor for updateUser() in UserDAO
+    public User(String username, String first, String last, String email, double reimbursementAmount) {
+        this.username = username;
+        this.email = email;
+        this.first = first;
+        this.last = last;
+        this.reimbursementAmount = reimbursementAmount;
     }
 
     public String getUsername() {
@@ -86,11 +95,11 @@ public class User extends AbstractUser {
         this.last = last;
     }
 
-    public String getReimbursementAmount() {
+    public double getReimbursementAmount() {
         return reimbursementAmount;
     }
 
-    public void setReimbursementAmount(String reimbursementAmount) {
+    public void setReimbursementAmount(double reimbursementAmount) {
         this.reimbursementAmount = reimbursementAmount;
     }
 

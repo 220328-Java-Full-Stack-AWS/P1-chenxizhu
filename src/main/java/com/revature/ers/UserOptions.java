@@ -1,7 +1,11 @@
 package com.revature.ers;
 
 import com.revature.ers.models.Reimbursement;
+import com.revature.ers.models.User;
 import com.revature.ers.repositories.ReimbursementDAO;
+import com.revature.ers.repositories.UserDAO;
+import com.revature.ers.services.ReimbursementService;
+import com.revature.ers.services.UserService;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -76,19 +80,42 @@ public class UserOptions {
         reimbursementAmount = s.nextDouble();
 
         Reimbursement r = new Reimbursement(firstname, lastname, reimbursementAmount, detail, email, Date.valueOf(date), username);
-        ReimbursementDAO rdao = new ReimbursementDAO();
-        rdao.createRequest(r);
+        ReimbursementService rd = new ReimbursementService(new ReimbursementDAO());
+        rd.create(r);
+        System.out.println("request summary");
         System.out.println(r);
         System.out.println("Request Submitted");
+
+
+        UserService userService = new UserService(new UserDAO());
+        com.revature.ers.models.User u = new User(username, firstname, lastname, email, reimbursementAmount);
+        System.out.println("Updating user profile");
+        userService.update(u);
+        System.out.println("User profile updated");
+        System.out.println(u);
+
         //send request for reimbursement
     }
     private static void option2() {
-        System.out.println("2- Cancel my request for reimbursement");
+        System.out.println("2- Request not yet Canceled.");
         //cancel my request for reimbursement
     }
     private static void option3() {
-        System.out.println("3- View my pending and completed past requests");
-        //view my pending and completed past requests
+        String username;
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter your user name:");//firstname:Reimbursement Model
+        username = s.nextLine();
+        UserDAO userdao = new UserDAO();
+        if (userdao.getUserByUserName(username).getUsername().equals(username)) {
+            ReimbursementService rd = new ReimbursementService(new ReimbursementDAO());
+            Reimbursement r = new Reimbursement();
+            rd.readMyRequest(r);
+            System.out.println("printing out r");
+            System.out.println(r);
+
+            System.out.println("3- View my pending and completed past requests");
+            //view my pending and completed past requests
+        }
     }
     private static void option4() {
         System.out.println("4- Edit my pending requests for reimbursement");

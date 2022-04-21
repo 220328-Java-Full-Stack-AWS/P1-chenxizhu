@@ -20,10 +20,20 @@
         <servlet-class>com.revature.ers.servlets.HealthServlet</servlet-class>
     </servlet>
 
-
     <servlet-mapping>
         <servlet-name>pingServlet</servlet-name>
         <url-pattern>/ping</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>CRUDServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.ToDoItemServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CRUDServlet</servlet-name>
+        <url-pattern>/crud</url-pattern>
     </servlet-mapping>
 
 

@@ -1,9 +1,12 @@
 package com.revature.ers;
+import com.revature.ers.models.User;
 import com.revature.ers.repositories.UserDAO;
 import com.revature.ers.services.UserService;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+
+//import static org.graalvm.compiler.options.OptionType.User;
 
 public class RegisterNewAccount {
     public RegisterNewAccount() {
@@ -29,7 +32,8 @@ public class RegisterNewAccount {
 
             //userDAO.saveUser(User);
             UserService userService = new UserService(new UserDAO());
-            userService.register(username, password);
+            com.revature.ers.models.User u = new User(username, password);
+            userService.register(u);
             System.out.println(userDAO.getAllUsers());
             System.out.println("Registration Successful");
             //code to store the data in the database

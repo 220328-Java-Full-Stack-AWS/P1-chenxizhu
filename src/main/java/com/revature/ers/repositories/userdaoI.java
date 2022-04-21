@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface userdaoI<T extends User> {
     //CRUD create read update delete
-    void saveUser(T u);
+    User createUser(T u);
 
     List<User> getAllUsers();
 
     User getUserByUserName(String username);
 
-    void updateUser(T u);
+    User updateUser(T u);
+
+    void deleteUser(T u);
 }

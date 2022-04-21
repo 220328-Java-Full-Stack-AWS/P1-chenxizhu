@@ -2,6 +2,7 @@ package com.revature.ers.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.models.User;
+import com.revature.ers.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,13 +12,13 @@ import java.io.IOException;
 
 public class ToDoItemServlet extends HttpServlet {
 
-    //private ToDoItemService service;
+    private UserService service;
     private ObjectMapper mapper;
 
 
     @Override
     public void init() throws ServletException {
-        //this.service = new ToDoItemService();
+        //this.service = new UserService();
         this.mapper = new ObjectMapper();
     }
 
@@ -55,7 +56,7 @@ public class ToDoItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User usermodel = mapper.readValue(req.getReader().toString(), User.class);
-        //usermodel = service.create(usermodel);
+        usermodel = service.register(usermodel);
         String json = mapper.writeValueAsString(usermodel);
         resp.setStatus(201);
         resp.getWriter().print(json);
@@ -64,7 +65,7 @@ public class ToDoItemServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User usermodel = mapper.readValue(req.getReader().toString(), User.class);
-        //usermodel = service.update(usermodel);
+        usermodel = service.update(usermodel);
         String json = mapper.writeValueAsString(usermodel);
         resp.setStatus(201);
         resp.getWriter().print(json);
@@ -72,7 +73,7 @@ public class ToDoItemServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //service.delete(Integer.parseInt(req.getHeader("user_id"));
+        //service.delete(Integer.parseInt(req.getHeader("user_id")));
         resp.setStatus(200);
     }
 }

@@ -16,8 +16,11 @@ import java.util.Optional;
 public class UserDAO implements userdaoI {
 
 
+
+
     //create new user
-    public void saveUser(User u) {
+
+    public User createUser(User u) {
         String sql = "INSERT INTO user_table (username, password) VALUES(?, ?)";
 
         try {
@@ -28,7 +31,10 @@ public class UserDAO implements userdaoI {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return u;
     }
+
+
 
     //returns a list of the entire content of User table
     public List<User> getAllUsers() {
@@ -59,7 +65,7 @@ public class UserDAO implements userdaoI {
 
 
 
-        User usermodel = new User();
+        User user = new User();
         try {
             String SQL = "select * from user_table where username = ? and password = ?;";
             Connection conn = ConnectionManager.getConnection();
@@ -73,10 +79,10 @@ public class UserDAO implements userdaoI {
 
             while(rs.next()) {
                 //User user = new User();
-                usermodel.setUsername(rs.getString("username"));
-                usermodel.setPassword(rs.getString("password"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
 
-                return usermodel;
+                return user;
             }
 
 
@@ -85,7 +91,7 @@ public class UserDAO implements userdaoI {
             e.printStackTrace();
         }
 
-        return usermodel;
+        return user;
 
 
     }
@@ -115,8 +121,43 @@ public class UserDAO implements userdaoI {
 
     }
 
-    public void updateUser(User u) {
 
+
+    public User updateUser(User u) {
+
+        String sql = "UPDATE user_table SET (first_name, last_name, email, reimbursementamount) = (?, ?, ?, ?) where username = ?;";
+        try {
+            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+            /*
+            String username = u.getUsername();
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            user.setUsername(rs.getString("username"));
+
+             */
+            pstmt.setString(1, u.getFirst());
+            pstmt.setString(2, u.getLast());
+            pstmt.setString(3, u.getEmail());
+            pstmt.setDouble(4, u.getReimbursementAmount());
+            pstmt.setString(5, u.getUsername());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return u;
+    }
+
+    public void deleteUser(User u) {
+        String username = u.getUsername();
+        String sql = "DELETE FROM user_table WHERE username = ?";
+
+        try {
+            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public UserDAO() {

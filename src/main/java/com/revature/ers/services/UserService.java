@@ -3,6 +3,9 @@ package com.revature.ers.services;
 
 import com.revature.ers.exceptions.UsernameOrPasswordIncorrectException;
 import com.revature.ers.repositories.UserDAO;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import com.revature.ers.models.User;
@@ -25,12 +28,13 @@ import com.revature.ers.models.User;
  * </ul>
  */
 public class UserService {
+
 	//public static Object Login;
 	//never intialized refactored it
 	public UserDAO ud;
 
 	//working on authenticate user with database
-	public UserService User;
+	//public UserService User;
 
 	//private UserDAO ud;
 
@@ -41,14 +45,12 @@ public class UserService {
 	}
 
 
-	public User login(String username, String password) {
-		// ud.userAuth(username,password);
+	public User login(User u) {
+		return ud.getUserByUserName(u.getUsername());
 		// the .get() gets over the extra layer between ud.getByUsername() and .getPassword()
 
-		User u = new User(username, password);
 		//if (ud.getByUsername(username).isPresent() && ud.getByUsername(username).get().getPassword().equals(password)) {
- 			if(ud.getUserByUserName(username) != null && ud.getUserByUserName(username).getPassword().equals(password)){
-				return ud.getUserByUserName(username);
+
 			/*
 			User u = new User(username, password);
 			ud.userAuth(username, password);
@@ -59,33 +61,57 @@ public class UserService {
 			}
 */
 		}
-		return u;
+
+
+	public static class GlobalUsernameStore {
+		private Map<String, Object> globalStore;
+
+		private GlobalUsernameStore(){
+			//private constructor -
+			// use getStore();
+		}
+
+		public Map<String, Object> getStore() {
+			if(globalStore == null) {
+				globalStore = new HashMap<String, Object>();
+			}
+
+			return globalStore;
+		}
+
+
+		//potentially where could go wrong on storing the username
+		public void add(String username, Object obj) {
+			globalStore.put(username, obj);
+		}
+
+		public Object getObject(String username) {
+			return globalStore.get(username);
+		}
 	}
 
-	public User register(String username, String password){
-
+	public User register(User u){
+		/*
 		User u = new User(username, password);
 		//From the service, we would make our database call to actually store this user away
 		ud.saveUser(u);
 		if (ud == null) {
 			throw new NullPointerException();
 		}
-		return u;
+		 */
+		return ud.createUser(u);
 	}
 	/**
 	 *     Should retrieve a User with the corresponding username or an empty optional if there is no match.
      */
-	public Optional<User> getByUsername(String username) {
 
-		return Optional.ofNullable(ud.getUserByUserName(username));
+	public User update(User u) {
+		return ud.updateUser(u);
+	}
 
+	public void delete(User u) {
+		ud.deleteUser(u);
 	}
 
 
-/*
-	public UserLogin() {
-
-	}
-
- */
 }

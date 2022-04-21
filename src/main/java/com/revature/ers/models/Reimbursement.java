@@ -46,6 +46,7 @@ public class Reimbursement extends AbstractReimbursement {
         this.username = username;
     }
 
+    //constructor for createRequest() in ReimbursementDAO
     public Reimbursement(String firstname, String lastname, double reimbursementAmount, String detail, String email, Date date, String username) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -55,6 +56,8 @@ public class Reimbursement extends AbstractReimbursement {
         this.date = date;
         this.username = username;
     }
+
+
 
 
     public int getReimbursementId() {

@@ -26,9 +26,8 @@ public class ReimbursementDAO implements ReimbursementDInterface {
     */
     //create
 
-    public void createRequest(Reimbursement r) {
-        String sql = "insert into reimburse_table (username, first_name, last_name, email,reimbursementamount, detail, submit_date) values (?, ?, ?, ?, ?, ?, ?);" +
-                "update user_table set (first_name, last_name, email, reimbursementamount) = (?, ?, ?, ?) where username = ?;";
+    public Reimbursement createRequest(Reimbursement r) {
+        String sql = "insert into reimburse_table (username, first_name, last_name, email,reimbursementamount, detail, submit_date) values (?, ?, ?, ?, ?, ?, ?);";
 
 
         try {
@@ -47,10 +46,11 @@ public class ReimbursementDAO implements ReimbursementDInterface {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return r;
     }
 
 
-    //read
+    //read at the moment it's show all request
     public List<Reimbursement> showMyRequests() {
         List<Reimbursement> Reimbursement = new LinkedList<>();
         try {
@@ -86,7 +86,7 @@ public class ReimbursementDAO implements ReimbursementDInterface {
 
 
     //read
-    public Reimbursement getRequestsByUsername(User username) {
+    public Reimbursement getRequestsByUsername(Reimbursement r) {
         List<Reimbursement> Reimbursement1 = new LinkedList<>();
         try {
             String SQL = "SELECT * FROM reimburse_table WHERE username = ?;";
@@ -113,7 +113,7 @@ public class ReimbursementDAO implements ReimbursementDInterface {
     };
 
     //update,edit requests
-    public void updateMyRequests(Reimbursement r){
+    public Reimbursement updateMyRequests(Reimbursement r){
         String sql = "UPDATE reimburse_table SET first_name, last_name, email,reimbursementamount, detail, submit_date  WHERE reimburse_id = ?";
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
@@ -129,12 +129,12 @@ public class ReimbursementDAO implements ReimbursementDInterface {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return r;
     };
 
     //delete, cancel my requests
     public void cancelMyRequests(Reimbursement r){
-        String sql = "DELETE FROM reimburser_table WHERE reimburse_id = ?";
+        String sql = "DELETE FROM reimburse_table WHERE reimburse_id = ?";
 
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);

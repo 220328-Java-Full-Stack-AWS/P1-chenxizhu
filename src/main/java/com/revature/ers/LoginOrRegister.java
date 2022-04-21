@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class LoginOrRegister {
 
+    public UserService us;
 
     public LoginOrRegister() {
     }
@@ -37,6 +38,10 @@ public class LoginOrRegister {
                 if (userTypedPassword.equals(password)) {
                     System.out.println(userdao.getUserByUserName(username).getPassword());
                     System.out.println("Authentication Successful");
+
+                    // get username in the memory for identifying requests after login
+                    //UserService.GlobalUsernameStore.add(username);
+
                     //display dashboard function;
                     new userOrAdmin();
                     userOrAdmin.main(new String[]{}, "");

@@ -28,19 +28,23 @@ import java.util.List;
  * </ul>
  */
 public class ReimbursementService {
-    //public static Object Login;
-    //never intialized refactored it
     public ReimbursementDAO rd;
 
-    //working on authenticate user with database
-    public ReimbursementService Reimburse;
-
-
-    //swap out with actual data base when ready
     public ReimbursementService(ReimbursementDAO rd) {
-
         this.rd = rd;
     }
+
+    public Reimbursement create(Reimbursement r) {
+        return rd.createRequest(r);
+    }
+
+    public Reimbursement readMyRequest(Reimbursement r) {
+        return rd.getRequestsByUsername(r);
+    }
+
+
+}
+
     /**
      * <ul>
      *     <li>Should ensure that the user is logged in as a Finance Manager</li>
@@ -56,20 +60,3 @@ public class ReimbursementService {
      * After processing, the reimbursement will have its status changed to either APPROVED or DENIED.
      */
 
-    public Reimbursement submitRequest(String firstname, String lastname, String email, double ReimbursementAmount, String detail, Date date) {
-        Reimbursement r = new Reimbursement();
-        return null;
-        //return Reimburse.Reimbursement();
-    }
-
-    public Reimbursement process(Reimbursement unprocessedReimbursement, Status finalStatus, User resolver) {
-        return null;
-    }
-
-    /**
-     * Should retrieve all reimbursements with the correct status.
-     */
-    public List<Reimbursement> getReimbursementsByStatus(Status status) {
-        return Collections.emptyList();
-    }
-}

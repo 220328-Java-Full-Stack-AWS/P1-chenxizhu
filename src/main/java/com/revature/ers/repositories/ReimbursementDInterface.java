@@ -9,13 +9,13 @@ public interface ReimbursementDInterface<R extends Reimbursement> {
 
     //CRUD create read update delete
     //create
-    void createRequest(R r);
+    Reimbursement createRequest(R r);
     //read
     List<Reimbursement> showMyRequests();
     Reimbursement getRequestsByAuthor(User author);
 
     //update,edit requests
-    void updateMyRequests(R r);
+    Reimbursement updateMyRequests(R r);
 
     //delete, cancel my requests
     void cancelMyRequests(R r);
