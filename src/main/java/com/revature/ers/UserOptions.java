@@ -108,18 +108,56 @@ public class UserOptions {
         UserDAO userdao = new UserDAO();
         if (userdao.getUserByUserName(username).getUsername().equals(username)) {
             //logic is off to transfer username to dao, figure out the data input type in reimbursementService and DAO
+            System.out.println(userdao.getUserByUserName(username)+ " does exist in user data base");
             ReimbursementService rd = new ReimbursementService(new ReimbursementDAO());
             Reimbursement r = new Reimbursement();
-            rd.readMyRequest(r);
-            System.out.println("printing out r");
-            System.out.println(r);
+            rd.readMyRequest(username);
+            System.out.println("printing out requests under this username.");
+            System.out.println("Print the last request from User option 3: " + rd.readMyRequest(username));
 
-            System.out.println("3- View my pending and completed past requests");
+            //System.out.println("3- View my pending and completed past requests");
             //view my pending and completed past requests
         }
     }
     private static void option4() {
-        System.out.println("4- Edit my pending requests for reimbursement");
+        int reimburseId;
+
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter the ID of the request you want to edit:");//reimbursementId:Reimbursement Model
+        reimburseId = Integer.parseInt(s.nextLine());
+        ReimbursementService rServ = new ReimbursementService(new ReimbursementDAO());
+        int dataBaseReimburseId = rServ.readRequestById(reimburseId).getReimbursementId();
+        Reimbursement editingThisRequest = rServ.readRequestById(reimburseId);
+        System.out.println(dataBaseReimburseId);
+        if (dataBaseReimburseId == reimburseId) {
+            System.out.println("request found");
+            System.out.println("The requesting you're editing: " + editingThisRequest);
+            String firstname, lastname, email, detail;
+            Double reimbursementAmount = 0.00;
+
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Update first name:");//firstname:Reimbursement Model
+            firstname = sc.nextLine();
+            System.out.print("Update last name:");//lastname:Reimbursement Model
+            lastname = sc.nextLine();
+            System.out.print("Update email:");//lastname:Reimbursement Model
+            email = sc.nextLine();
+            System.out.print("Update details and nature of your request:");//detail:Reimbursement Model
+            detail = sc.nextLine();
+            System.out.println("Update reimbursement amount:");//reimbursementamout: Reimbursement model
+            reimbursementAmount = sc.nextDouble();
+
+            //ReimbursementService rs = new ReimbursementService(new ReimbursementDAO());
+            Reimbursement r = new Reimbursement(firstname, lastname, reimbursementAmount, detail, email, reimburseId);
+
+            rServ.update(r);
+            System.out.println("The request before editing: " + editingThisRequest);
+            System.out.println("This is your request after edit: " + r);
+
+            System.out.println("4- Your request has been updated.");
+        } else {
+            System.out.println("no record found.");
+        }
         //edit my pending requests for reimbursement
     }
 

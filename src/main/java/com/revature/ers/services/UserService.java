@@ -63,32 +63,7 @@ public class UserService {
 		}
 
 
-	public static class GlobalUsernameStore {
-		private Map<String, Object> globalStore;
 
-		private GlobalUsernameStore(){
-			//private constructor -
-			// use getStore();
-		}
-
-		public Map<String, Object> getStore() {
-			if(globalStore == null) {
-				globalStore = new HashMap<String, Object>();
-			}
-
-			return globalStore;
-		}
-
-
-		//potentially where could go wrong on storing the username
-		public void add(String username, Object obj) {
-			globalStore.put(username, obj);
-		}
-
-		public Object getObject(String username) {
-			return globalStore.get(username);
-		}
-	}
 
 	public User register(User u){
 		/*

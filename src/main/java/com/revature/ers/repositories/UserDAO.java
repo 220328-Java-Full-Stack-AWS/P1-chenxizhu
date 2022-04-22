@@ -103,16 +103,19 @@ public class UserDAO implements userdaoI {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, username);
-
-
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()) {
-                //duplicated not necessary statement. causing user not being updateds
+                //duplicated not necessary statement. causing user not being updated
                 //User User = new User();
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
-                System.out.println(user);
+                user.setFirst(rs.getString("first_name"));
+                user.setLast(rs.getString("last_name"));
+                user.setEmail(rs.getString("email"));
+                user.setReimbursementAmount(rs.getDouble("reimbursementamount"));
+                user.setUserId(rs.getInt("user_id"));
+                System.out.println("print from UserDAO: " + user);
             }
         } catch (SQLException e) {
             e.printStackTrace();

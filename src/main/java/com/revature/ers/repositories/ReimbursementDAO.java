@@ -86,43 +86,79 @@ public class ReimbursementDAO implements ReimbursementDInterface {
 
 
     //read
-    public Reimbursement getRequestsByUsername(Reimbursement r) {
-        List<Reimbursement> Reimbursement1 = new LinkedList<>();
+    public Reimbursement getRequestsByUsername(String username) {
+        Reimbursement reimbursement = new Reimbursement();
         try {
             String SQL = "SELECT * FROM reimburse_table WHERE username = ?;";
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, username);
 
             ResultSet rs = pstmt.executeQuery();
 
+            System.out.println("Here're the requests submitted under your user name.");
             while(rs.next()) {
-                Reimbursement reimbursement  = new Reimbursement();
+                //Reimbursement reimbursement  = new Reimbursement();
                 reimbursement.setFirstname(rs.getString("first_name"));
                 reimbursement.setLastname(rs.getString("last_name"));
                 reimbursement.setEmail(rs.getString("email"));
                 reimbursement.setReimbursementAmount(rs.getDouble("reimbursementamount"));
                 reimbursement.setDetail(rs.getString("detail"));
                 reimbursement.setDate(rs.getDate("submit_date"));
-                Reimbursement1.add(reimbursement);
+                reimbursement.setReimbursementId(rs.getInt("reimburse_id"));
+
+                System.out.println("Print from ReimbursementDAO: " + reimbursement);
                 //System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (Reimbursement) Reimbursement1;
+        return reimbursement;
+    };
+
+    //read
+    public Reimbursement getRequestsById(int reimbursementId) {
+        Reimbursement reimbursement = new Reimbursement();
+        try {
+            String SQL = "SELECT * FROM reimburse_table WHERE reimburse_id = ?;";
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, reimbursementId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            System.out.println("Here's the request based on the ID you enter'.");
+            while(rs.next()) {
+                //Reimbursement reimbursement  = new Reimbursement();
+                reimbursement.setFirstname(rs.getString("first_name"));
+                reimbursement.setLastname(rs.getString("last_name"));
+                reimbursement.setEmail(rs.getString("email"));
+                reimbursement.setReimbursementAmount(rs.getDouble("reimbursementamount"));
+                reimbursement.setDetail(rs.getString("detail"));
+                reimbursement.setDate(rs.getDate("submit_date"));
+                reimbursement.setReimbursementId(rs.getInt("reimburse_id"));
+
+                System.out.println("Print from ReimbursementDAO get request by ID: " + reimbursement);
+                //System.out.println(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reimbursement;
     };
 
     //update,edit requests
     public Reimbursement updateMyRequests(Reimbursement r){
-        String sql = "UPDATE reimburse_table SET first_name, last_name, email,reimbursementamount, detail, submit_date  WHERE reimburse_id = ?";
+        String sql = "UPDATE reimburse_table SET (first_name, last_name, email, reimbursementamount, detail) = (?, ?, ?, ?, ?) WHERE reimburse_id = ?;";
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(sql);
             pstmt.setString(1, r.getFirstname());
             pstmt.setString(2, r.getLastname());
-            pstmt.setString(2, r.getEmail());
-            pstmt.setDouble(2, r.getReimbursementAmount());
-            pstmt.setString(2, r.getDetail());
-            pstmt.setDate(3, r.getDate());
+            pstmt.setString(3, r.getEmail());
+            pstmt.setDouble(4, r.getReimbursementAmount());
+            pstmt.setString(5, r.getDetail());
+            pstmt.setInt(6, r.getReimbursementId());
+            //pstmt.setDate(3, r.getDate());
             //pstmt.setBoolean(4, r.isCompleted());
             //pstmt.setInt(5, r.getItemId());
             pstmt.executeUpdate();

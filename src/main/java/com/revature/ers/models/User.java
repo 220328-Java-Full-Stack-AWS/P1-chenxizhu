@@ -1,7 +1,5 @@
 package com.revature.ers.models;
 
-import java.util.HashSet;
-
 /**
  * This concrete User class can include additional fields that can be used for
  * extended functionality of the ERS application.
@@ -26,14 +24,14 @@ public class User extends AbstractUser {
     private double reimbursementAmount;
     private Integer numberOfReimbursements;
     private Role role;
-    private int id;
+    private int userId;
 
     private boolean requestStatus;
 
     public User() {
     }
 
-    public User(String username, String password, String email, String first, String last, double reimbursementAmount, Integer numberOfReimbursements, Role role, int id, boolean requestStatus) {
+    public User(String username, String password, String email, String first, String last, double reimbursementAmount, Integer numberOfReimbursements, Role role, int userId, boolean requestStatus) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -42,7 +40,7 @@ public class User extends AbstractUser {
         this.reimbursementAmount = reimbursementAmount;
         this.numberOfReimbursements = numberOfReimbursements;
         this.role = role;
-        this.id = id;
+        this.userId = userId;
         this.requestStatus = requestStatus;
     }
 
@@ -119,12 +117,12 @@ public class User extends AbstractUser {
         this.role = role;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public boolean isRequestStatus() {
@@ -139,10 +137,10 @@ public class User extends AbstractUser {
      * This includes the minimum parameters needed for the {@link AbstractUser} class.
      * If other fields are needed, please create additional constructors.
      */
-    public User(int id, String username, String password, Role role) {
+    public User(int userId, String username, String password, Role role) {
 
         //super(id, username, password, role);
-        this.id = id;
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -165,7 +163,7 @@ public class User extends AbstractUser {
                 ", reimbursementAmount='" + reimbursementAmount + '\'' +
                 ", reimbursement='" + numberOfReimbursements + '\'' +
                 ", role=" + role +
-                ", id=" + id +
+                ", id=" + userId +
                 ", requestStatus=" + requestStatus +
                 '}';
     }

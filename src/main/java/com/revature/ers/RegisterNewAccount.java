@@ -45,6 +45,8 @@ public class RegisterNewAccount {
         else
         {
             System.out.println("Registration Failed. You might want to use a longer username and password.");
+            new LoginOrRegister();
+            LoginOrRegister.main(new String[]{});
         }
         if (!password.equals(confirmPassword)) {
             System.out.println("Password not matching.");

@@ -34,14 +34,25 @@ public class ReimbursementService {
         this.rd = rd;
     }
 
+    //create
     public Reimbursement create(Reimbursement r) {
         return rd.createRequest(r);
     }
 
-    public Reimbursement readMyRequest(Reimbursement r) {
-        return rd.getRequestsByUsername(r);
+    // read by username
+    public Reimbursement readMyRequest(String username) {
+        return rd.getRequestsByUsername(username);
     }
 
+    //read by id
+    public Reimbursement readRequestById(int reimbursementId) {
+        return rd.getRequestsById(reimbursementId);
+    }
+
+
+    public Reimbursement update(Reimbursement r) {
+        return rd.updateMyRequests(r);
+    }
 
 }
 

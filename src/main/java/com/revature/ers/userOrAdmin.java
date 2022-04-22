@@ -12,7 +12,9 @@ public class userOrAdmin {
         Scanner s = new Scanner(System.in);
         System.out.print("admin password:");//username:user
         admin = s.nextLine();
-        if (admin.equals("babyyodanocap")) {
+        if (admin.equals("admin")) {
+            new AdminOptions();
+            AdminOptions.printMenu(new String[]{""});
             System.out.println("You now have admin access.");
         } else {
             System.out.println("Welcome peasant.");
