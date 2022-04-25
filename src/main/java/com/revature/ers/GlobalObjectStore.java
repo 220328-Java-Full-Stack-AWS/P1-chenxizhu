@@ -1,5 +1,7 @@
 package com.revature.ers;
 
+import com.revature.ers.repositories.UserDAO;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,13 +11,16 @@ import java.util.Map;
 public class GlobalObjectStore {
 
 
-    private Map<String, Object> globalStore;
+    private static final Map<String, Object> globalStore = new HashMap<String, Object>();
 
     private GlobalObjectStore() {
         //private constructor -
         // use getStore();
+        //no need to build an object. Why?
     }
 
+
+    /*
     public Map<String, Object> getStore() {
         if (globalStore == null) {
             globalStore = new HashMap<String, Object>();
@@ -23,15 +28,22 @@ public class GlobalObjectStore {
 
         return globalStore;
     }
-
+*/
 
     //potentially where could go wrong on storing the username
-    public void add(String username, Object obj) {
-        globalStore.put(username, obj);
+    public static void addObject(String name, Object obj) {
+        globalStore.put(name, obj);
     }
 
-    public static Object getObject(String username) {
-        return GlobalObjectStore.getObject(username);
+    public static Object getObject(String name) {
+        //return GlobalObjectStore.getObject(name);
+        UserDAO userdao = new UserDAO();
+        return globalStore.get(userdao.getUserByUserName(name));
+    }
+
+    public static void removeObject(String name) {
+        Object obj = globalStore.remove(name);
+        System.out.println("Object removed: " + obj);
     }
 }
 

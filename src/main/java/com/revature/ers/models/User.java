@@ -3,7 +3,7 @@ package com.revature.ers.models;
 /**
  * This concrete User class can include additional fields that can be used for
  * extended functionality of the ERS application.
- *
+ * <p>
  * Example fields:
  * <ul>
  *     <li>First Name</li>
@@ -12,7 +12,6 @@ package com.revature.ers.models;
  *     <li>Phone Number</li>
  *     <li>Address</li>
  * </ul>
- *
  */
 public class User extends AbstractUser {
     private String username;
@@ -168,8 +167,5 @@ public class User extends AbstractUser {
                 '}';
     }
 
-    //@Override
-    public int compareTo(User o) {
-        return 0;
-    }
+
 }

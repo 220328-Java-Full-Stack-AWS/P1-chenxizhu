@@ -3,7 +3,6 @@ package com.revature.ers.servlets;
 import com.revature.ers.ErsDriver;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,5 +22,10 @@ public class HealthServlet extends HttpServlet {
         PrintWriter pw = resp.getWriter();
         pw.print("stuff");
         resp.getWriter().print("stuff");
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

@@ -6,7 +6,7 @@ import java.sql.Date;
 /**
  * This concrete Reimbursement class can include additional fields that can be used for
  * extended functionality of the ERS application.
- *
+ * <p>
  * Example fields:
  * <ul>
  *     <li>Description</li>
@@ -14,7 +14,6 @@ import java.sql.Date;
  *     <li>Resolution Date</li>
  *     <li>Receipt Image</li>
  * </ul>
- *
  */
 public class Reimbursement extends AbstractReimbursement {
     private int reimbursementId;
@@ -69,8 +68,12 @@ public class Reimbursement extends AbstractReimbursement {
         this.username = username;
     }
 
+    //constructor for delete() in ReimbursementService
 
 
+    public Reimbursement(int reimbursementId) {
+        this.reimbursementId = reimbursementId;
+    }
 
     public int getReimbursementId() {
         return reimbursementId;

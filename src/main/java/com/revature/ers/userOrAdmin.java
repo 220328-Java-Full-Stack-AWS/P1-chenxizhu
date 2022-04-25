@@ -14,6 +14,8 @@ public class userOrAdmin {
         admin = s.nextLine();
         if (admin.equals("admin")) {
             new AdminOptions();
+            AdminOptions.printAllRequests(new String[]{});
+            AdminOptions.main(new String[]{});
             AdminOptions.printMenu(new String[]{""});
             System.out.println("You now have admin access.");
         } else {
