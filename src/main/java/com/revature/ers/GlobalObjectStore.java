@@ -38,7 +38,10 @@ public class GlobalObjectStore {
     public static Object getObject(String name) {
         //return GlobalObjectStore.getObject(name);
         UserDAO userdao = new UserDAO();
-        return globalStore.get(userdao.getUserByUserName(name));
+        Object obj = globalStore.get(name);
+        System.out.println("Object retrieved: " + obj);
+        System.out.println(userdao.getUserByUserName(name));
+        return obj;
     }
 
     public static void removeObject(String name) {

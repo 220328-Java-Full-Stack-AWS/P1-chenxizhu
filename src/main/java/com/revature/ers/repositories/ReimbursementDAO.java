@@ -68,6 +68,7 @@ public class ReimbursementDAO implements ReimbursementDInterface {
                 reimbursement.setReimbursementAmount(rs.getDouble("reimbursementamount"));
                 reimbursement.setDetail(rs.getString("detail"));
                 reimbursement.setDate(rs.getDate("submit_date"));
+                reimbursement.setReimbursementId(rs.getInt("reimburse_id"));
                 Reimbursement.add(reimbursement);
                 //System.out.println(user);
             }

@@ -154,16 +154,16 @@ public class User extends AbstractUser {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", first='" + first + '\'' +
-                ", last='" + last + '\'' +
-                ", reimbursementAmount='" + reimbursementAmount + '\'' +
-                ", reimbursement='" + numberOfReimbursements + '\'' +
-                ", role=" + role +
-                ", id=" + userId +
-                ", requestStatus=" + requestStatus +
+                "\nusername='" + username + '\'' +
+                ", \npassword='" + password + '\'' +
+                ", \nemail='" + email + '\'' +
+                ", \nfirst='" + first + '\'' +
+                ", \nlast='" + last + '\'' +
+                ", \nreimbursementAmount='" + reimbursementAmount + '\'' +
+                ", \nreimbursement='" + numberOfReimbursements + '\'' +
+                ", \nrole=" + role +
+                ", \nid=" + userId +
+                ", \nrequestStatus=" + requestStatus +
                 '}';
     }
 

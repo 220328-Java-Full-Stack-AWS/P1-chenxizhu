@@ -177,16 +177,16 @@ public class Reimbursement extends AbstractReimbursement {
     @Override
     public String toString() {
         return "Reimbursement{" +
-                "reimbursementId=" + reimbursementId +
-                ", status=" + status +
-                ", author=" + author +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", resolver=" + resolver +
-                ", reimbursementAmount=" + reimbursementAmount +
-                ", detail='" + detail + '\'' +
-                ", email='" + email + '\'' +
-                ", date=" + date +
+                "\nreimbursementId=" + reimbursementId +
+                ",\nstatus=" + status +
+                ",\nauthor=" + author +
+                ",\nfirstname='" + firstname + '\'' +
+                ",\nlastname='" + lastname + '\'' +
+                ",\nresolver=" + resolver +
+                ",\nreimbursementAmount=" + reimbursementAmount +
+                ",\ndetail='" + detail + '\'' +
+                ",\nemail='" + email + '\'' +
+                ",\ndate=" + date +
                 '}';
     }
 }
