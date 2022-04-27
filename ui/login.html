@@ -12,42 +12,43 @@
     and some javascript to find them and see their data. The classes are for styling. We are
     putting a visible box "contentBox" around a flexbox arranged as a column. The flexbox contains
     "flexRow"s which have the input elements.-->
+
 <body>
-<div class="contentBox">
-    <div class="flexColumn">
-        <div class="flexRow">
-            <label>Username: </label>
-            <input type="text" id="username" placeholder="username" name="username">
+    <div class="contentBox">
+        <div class="flexColumn">
+            <div class="flexRow">
+                <label>Username: </label>
+                <input type="text" id="username" placeholder="username" name="username">
+            </div>
+            <div class="flexRow">
+                <label>Password: </label>
+                <input type="text" id="password" placeholder="password" name="password">
+            </div>
         </div>
-        <div class="flexRow">
-            <label>Password: </label>
-            <input type="text" id="password" placeholder="password" name="password">
-        </div>
+        <!-- onclick="submitForm()" hooks into our javascript, calling the funciton below -->
+        <button onclick="submitForm()">Login</button>
     </div>
-    <!-- onclick="submitForm()" hooks into our javascript, calling the funciton below -->
-    <button onclick="submitForm()">Login</button>
-</div>
 
-<!-- This brings in all of the scripts in the source file.
+    <!-- This brings in all of the scripts in the source file.
     They are effectively "inlined" into this document -->
-<script src="./scripts/userConnection.js"></script>
+    <script src="./scripts/userConnection.js"></script>
 
-<!-- We can have multiple script elements in one document.
+    <!-- We can have multiple script elements in one document.
     Script elements contain javascript, not HTML -->
-<script>
+    <script>
         //so from here until the closing /script tag it's all js.
         async function submitForm() {
             /*
             Build the object we will transfer in our API call. Grab the values from
             the input elements above.
             */
-            let authDto = {
+            let loginUser = {
                 username: document.getElementById("username").value,
                 password: document.getElementById("password").value
             }
 
             //Make our asynchronous API call
-            let response = await loginRequest(authDto);
+            let response = await loginRequest(loginUser);
 
             console.log("Response: ", response);//fact finding
             console.log("Response JSON: ", response.json());//we should delete these later
@@ -77,7 +78,7 @@
 
 
 
-</script>
+    </script>
 </body>
 
 </html>

@@ -17,12 +17,20 @@ newUser should be an object that your API can parse, something like:
 let newUser = {
     username: username,
     password: password,
+}
 
+let loginUser = {
+    username: username,
+    password: password,
+}
+
+let updateUser = {
+    username: username,
+    password: password,
     email: email,
     firstName: first,
     lastName: last,
     role: role,
-
 }
 
 async function registerRequest(newUser) {
@@ -49,16 +57,18 @@ let authDto = {
     password: pw
 }
 */
-async function loginRequest(authDto) {
+async function loginRequest(loginUser) {
     let response = await fetch(
         userResourceURL,
         {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "mode": "login"
+                "mode": "login",
+                "username": loginUser.username,
+                "password": loginUser.password
             },
-            body: JSON.stringify(authDto)
+            body: JSON.stringify(loginUser)
         }
     );
 
@@ -78,7 +88,7 @@ let user = {
     role: ro
 }
 */
-async function updateUserRequest(user) {
+async function updateUserRequest(updateUser) {
     let response = await fetch(
         userResourceURL,
         {
@@ -86,7 +96,7 @@ async function updateUserRequest(user) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(updateUser)
         }
     );
 

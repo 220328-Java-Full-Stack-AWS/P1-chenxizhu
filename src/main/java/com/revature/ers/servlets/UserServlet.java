@@ -2,7 +2,6 @@ package com.revature.ers.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.GlobalObjectStore;
-import com.revature.ers.dto.UserDto;
 import com.revature.ers.models.User;
 import com.revature.ers.repositories.UserDAO;
 
@@ -36,14 +35,12 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
-        System.out.println(req.getHeader("mode"));
+        System.out.println("Printing from UserServlet doPost " + req.getHeader("mode"));
         switch (req.getHeader("mode")) {
             case "register":
                 User newUser = new ObjectMapper().readValue(req.getInputStream(), User.class);
                 //User newUser = mapper.readValue(req.getReader().toString(), User.class);
-                System.out.println(newUser);
+                //System.out.println(newUser);
                 uDao.createUser(newUser);
                 //GlobalObjectStore.addObject(newUser.getUsername(), newUser);
                 resp.setStatus(201);
@@ -53,15 +50,14 @@ public class UserServlet extends HttpServlet {
                 break;
 
             case "login":
-                System.out.println(req.getHeader("username"));
-                System.out.println(req.getHeader("password"));
+                System.out.println("Printing from UserServelet doPost login " + req.getHeader("username") + "\n" + req.getHeader("password"));
                 //System.out.println(uDao.getUserByUserName(req.getHeader("username")));
-                System.out.println(mapper.readValue(req.getInputStream(), User.class));
                 User checkUser = uDao.getUserByUserName(req.getHeader("username"));
-                User authUser = mapper.readValue(req.getInputStream(), User.class);
-
+                System.out.println("Printing from UserServlet checkUser: " + checkUser);
+                User authUser = new ObjectMapper().readValue(req.getInputStream(), User.class);
                 //User checkUser = (User) GlobalObjectStore.getObject(authUser.getUsername());
                 if (checkUser != null && checkUser.getPassword().equals(authUser.getPassword())) {
+                    System.out.println("Printing from UserServlet pass login password check: " + checkUser.getPassword());
                     resp.setStatus(200);
                     resp.getWriter().print(new ObjectMapper().writeValueAsString(checkUser));
                     resp.setHeader("access-control-expose-headers", "authToken");
@@ -95,11 +91,11 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDto updateUserDto = new ObjectMapper().readValue(req.getInputStream(), UserDto.class);
-        GlobalObjectStore.removeObject(updateUserDto.getUsername());
-        GlobalObjectStore.addObject(updateUserDto.getUsername(), updateUserDto);
+        User updateUser = new ObjectMapper().readValue(req.getInputStream(), User.class);
+        GlobalObjectStore.removeObject(updateUser.getUsername());
+        GlobalObjectStore.addObject(updateUser.getUsername(), updateUser);
         resp.setStatus(200);
-        resp.getWriter().print(new ObjectMapper().writeValueAsString(updateUserDto));
+        resp.getWriter().print(new ObjectMapper().writeValueAsString(updateUser));
     }
 
     @Override
