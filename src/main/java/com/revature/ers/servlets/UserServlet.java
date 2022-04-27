@@ -36,6 +36,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
         System.out.println(req.getHeader("mode"));
         switch (req.getHeader("mode")) {
             case "register":
@@ -51,6 +53,23 @@ public class UserServlet extends HttpServlet {
                 break;
 
             case "login":
+                System.out.println(req.getHeader("username"));
+                System.out.println(req.getHeader("password"));
+                System.out.println(mapper.readValue(req.getInputStream(), User.class));
+
+                User authUser = mapper.readValue(req.getInputStream(), User.class);
+                User checkUser = uDao.getUserByUserName(req.getHeader("username"));
+                //User checkUser = (User) GlobalObjectStore.getObject(authUser.getUsername());
+                if (checkUser != null && checkUser.getPassword().equals(authUser.getPassword())) {
+                    resp.setStatus(200);
+                    resp.getWriter().print(new ObjectMapper().writeValueAsString(checkUser));
+                    resp.setHeader("access-control-expose-headers", "authToken");
+                    resp.setHeader("authToken", checkUser.getUsername());
+                    resp.getWriter().print("User Authenticated.");
+                } else {
+                    resp.setStatus(401);
+                }
+            /*
                 User authUser = new ObjectMapper().readValue(req.getInputStream(), User.class);
                 User checkUser = (User) GlobalObjectStore.getObject(authUser.getUsername());
                 if (checkUser != null && checkUser.getPassword().equals(authUser.getPassword())) {
@@ -62,11 +81,15 @@ public class UserServlet extends HttpServlet {
                 } else {
                     resp.setStatus(401);
                 }
+
+             */
                 break;
             default:
                 resp.setStatus(400);
                 break;
         }
+
+
     }
 
     @Override

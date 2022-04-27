@@ -7,7 +7,7 @@ You should start by adapting the URL to match your resource endpoint.
 
 //let userResourceURL = "http://localhost:port/contextpath/resourcepath"; //CHANGE ME!
 //Example backend location:
-let userResourceURL = "http://localhost:8080/api/user";
+let userResourceURL = "http://localhost:8080/ERS/user";
 //Note the context path is set to "/api" make sure to change that in the build config
 /*
 register function - sends a POST request with a new user object.
@@ -23,14 +23,14 @@ let newUser = {
 
     role: role,
 
-        private String password;
-        private String email;
-        private String first;
-        private String last;
-        private double reimbursementAmount;
-        private Integer numberOfReimbursements;
-        private Role role;
-        private int userId;
+    private String password;
+    private String email;
+    private String first;
+    private String last;
+    private double reimbursementAmount;
+    private Integer numberOfReimbursements;
+    private Role role;
+    private int userId;
 }
 
 async function registerRequest(newUser) {

@@ -10,47 +10,50 @@
 </head>
 
 <body>
-<!-- This is our input form. We're not using the HTML form tags here, just some bare elements
+    <!-- This is our input form. We're not using the HTML form tags here, just some bare elements
 and some javascript to find them and see their data. The classes are for styling. We are
 putting a visible box "contentBox" around a flexbox arranged as a column. The flexbox contains
 "flexRow"s which have the input elements.-->
-<div class="contentBox">
-    <div class="flexColumn">
-        <div class="flexRow">
-            <label>First name: </label>
-            <input type="text" id="firstName" placeholder="firstName" name="John">
-        </div>
-        <div class="flexRow">
-            <label>Last name: </label>
-            <input type="text" id="lastName" placeholder="lastName" name="Smith">
-        </div>
-        <div class="flexRow">
-            <label>Username: </label>
-            <input type="text" id="username" placeholder="username" name="jsmith123">
-        </div>
-        <div class="flexRow">
-            <label>Password: </label>
-            <input type="text" id="password" placeholder="password" name="N1n31nchn41ls!">
-        </div>
-        <div class="flexRow">
-            <label>Email: </label>
-            <input type="text" id="email" placeholder="email" name="john.smith@email.com">
+    <div class="contentBox">
+        <div class="flexColumn">
+            <!--
+            <div class="flexRow">
+                <label>First name: </label>
+                <input type="text" id="firstName" placeholder="firstName" name="John">
+            </div>
+            <div class="flexRow">
+                <label>Last name: </label>
+                <input type="text" id="lastName" placeholder="lastName" name="Smith">
+            </div>
+            -->
+            <div class="flexRow">
+                <label>Username: </label>
+                <input type="text" id="username" placeholder="username" name="jsmith123">
+            </div>
+            <div class="flexRow">
+                <label>Password: </label>
+                <input type="text" id="password" placeholder="password" name="N1n31nchn41ls!">
+            </div>
+            <!--
+            <div class="flexRow">
+                <label>Email: </label>
+                <input type="text" id="email" placeholder="email" name="john.smith@email.com">
+            </div>
+            -->
+            <!-- onclick="submitForm()" hooks into our javascript, calling the funciton below -->
+            <button id="contentBoxButton" onclick="submitForm()">Register</button>
         </div>
 
-        <!-- onclick="submitForm()" hooks into our javascript, calling the funciton below -->
-        <button id="contentBoxButton" onclick="submitForm()">Register</button>
+
     </div>
 
-
-</div>
-
-<!-- This brings in all of the scripts in the source file.
+    <!-- This brings in all of the scripts in the source file.
     They are effectively "inlined" into this document -->
-<script src="./scripts/userConnection.js"></script>
+    <script src="./scripts/userConnection.js"></script>
 
-<!-- We can have multiple script elements in one document.
+    <!-- We can have multiple script elements in one document.
     Script elements contain javascript, not HTML -->
-<script>
+    <script>
         //so from here until the closing /script tag it's all js.
         async function submitForm() {
 
@@ -61,9 +64,9 @@ putting a visible box "contentBox" around a flexbox arranged as a column. The fl
             let newUser = {
                 username: document.getElementById("username").value,
                 password: document.getElementById("password").value,
-                firstName: document.getElementById("firstName").value,
-                lastName: document.getElementById("lastName").value,
-                email: document.getElementById("email").value
+                //first: document.getElementById("firstName").value,
+                //last: document.getElementById("lastName").value,
+                //email: document.getElementById("email").value
             }
             console.log(newUser);//fact finding
 
@@ -96,7 +99,7 @@ putting a visible box "contentBox" around a flexbox arranged as a column. The fl
             }
         }
 
-</script>
+    </script>
 
 
 </body>
