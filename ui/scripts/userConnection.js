@@ -17,20 +17,12 @@ newUser should be an object that your API can parse, something like:
 let newUser = {
     username: username,
     password: password,
+
     email: email,
     firstName: first,
     lastName: last,
-
     role: role,
 
-    private String password;
-    private String email;
-    private String first;
-    private String last;
-    private double reimbursementAmount;
-    private Integer numberOfReimbursements;
-    private Role role;
-    private int userId;
 }
 
 async function registerRequest(newUser) {

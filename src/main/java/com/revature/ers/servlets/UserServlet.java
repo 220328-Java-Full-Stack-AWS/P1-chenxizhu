@@ -55,10 +55,11 @@ public class UserServlet extends HttpServlet {
             case "login":
                 System.out.println(req.getHeader("username"));
                 System.out.println(req.getHeader("password"));
+                //System.out.println(uDao.getUserByUserName(req.getHeader("username")));
                 System.out.println(mapper.readValue(req.getInputStream(), User.class));
-
-                User authUser = mapper.readValue(req.getInputStream(), User.class);
                 User checkUser = uDao.getUserByUserName(req.getHeader("username"));
+                User authUser = mapper.readValue(req.getInputStream(), User.class);
+
                 //User checkUser = (User) GlobalObjectStore.getObject(authUser.getUsername());
                 if (checkUser != null && checkUser.getPassword().equals(authUser.getPassword())) {
                     resp.setStatus(200);
