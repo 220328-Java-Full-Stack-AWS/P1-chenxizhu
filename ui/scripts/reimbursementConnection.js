@@ -6,13 +6,15 @@ let reimbursementResourceURL = "http://localhost:8080/ERS/reimbursement";
 
 
 let newReimbursement = {
-    username: username,
-    firstName: firstname,
-    lastName: lastname,
+
+    firstname: firstname,
+    lastname: lastname,
+    reimbursementAmount: amount,
+    details: details,
     email: email,
-    amount: reimbursementAmount,
-    detail: details,
-    date: date
+    date: date,
+    username: username
+
 }
 
 async function createReimbursement(newReimbursement) {
@@ -22,19 +24,15 @@ async function createReimbursement(newReimbursement) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-
-
-
-
-
-
-                "date": newReimbursement.date,
-                "detail": newReimbursement.detail,
-                "amount": newReimbursement.amount,
-                "email": newReimbursement.email,
-                "lastname": newReimbursement.lastName,
-                "firstname": newReimbursement.firstName,
+                /*
                 "username": newReimbursement.username,
+                "firstname": newReimbursement.firstName,
+                "lastname": newReimbursement.lastName,
+                "email": newReimbursement.email,
+                "reimbursementAmount": newReimbursement.reimbursementAmount,
+                "details": newReimbursement.details,
+                "date": newReimbursement.date,
+                */
             },
             body: JSON.stringify(newReimbursement)
         }

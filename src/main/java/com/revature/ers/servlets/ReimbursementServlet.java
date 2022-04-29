@@ -10,15 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 public class ReimbursementServlet extends HttpServlet {
 
     private ReimbursementService rServ;
     private ObjectMapper mapper;
 
+
     public void init() throws ServletException {
         this.rServ = new ReimbursementService(new ReimbursementDAO());
         this.mapper = new ObjectMapper();
+
+
     }
 
     //view requests
@@ -33,14 +37,21 @@ public class ReimbursementServlet extends HttpServlet {
     //create new request
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Printing from Reimbursement Servlet doPost " + req.getHeader("firstname"));
+        String requestData = req.getReader().lines().collect(Collectors.joining());
+
+        System.out.println("Printing from Reimbursement Servlet doPost " + req.getHeader("details"));
+        System.out.println("Printing from Reimbursement Servlet doPost " + requestData);
         //new ObjectMapper().readValue(req.getInputStream(), User.class);
         //Reimbursement newReimbursement = mapper.readValue(req.getReader().toString(), Reimbursement.class);
 
-        Reimbursement newReimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
+        //Reimbursement newReimbursement = mapper.readValue(req.getInputStream(), Reimbursement.class);
+
+        Reimbursement newReimbursement = mapper.readValue(requestData, Reimbursement.class);
+
         //System.out.println(newUser);
         System.out.println("Print from ReimbursementServlet: " + newReimbursement);
         rServ.create(newReimbursement);
+
         //GlobalObjectStore.addObject(newUser.getUsername(), newUser);
         resp.setStatus(201);
         resp.getWriter().print(new ObjectMapper().writeValueAsString(newReimbursement));
